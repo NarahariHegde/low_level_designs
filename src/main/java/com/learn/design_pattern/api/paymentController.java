@@ -1,6 +1,7 @@
 package com.learn.design_pattern.api;
 
 import com.learn.design_pattern.application.PaymentService;
+import com.learn.design_pattern.domain.dto.PaymentResult;
 import com.learn.design_pattern.domain.model.PaymentTransaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ public class paymentController {
     private final PaymentService paymentService;
 
     @GetMapping("/doPayment")
-    public ResponseEntity<?> makePayment(@RequestBody PaymentTransaction paymentTransaction) {
+    public ResponseEntity<PaymentResult> makePayment(@RequestBody PaymentTransaction paymentTransaction) {
         paymentService.makePayment(paymentTransaction);
-        return ResponseEntity.ofNullable(paymentTransaction);
+        return ResponseEntity.ofNullable(paymentService.makePayment(paymentTransaction));
     }
 }

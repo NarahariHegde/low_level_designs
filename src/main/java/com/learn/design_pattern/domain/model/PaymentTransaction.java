@@ -1,5 +1,6 @@
 package com.learn.design_pattern.domain.model;
 
+import com.learn.design_pattern.domain.enums.PaymentStatus;
 import com.learn.design_pattern.domain.enums.PaymentType;
 import com.learn.design_pattern.domain.pattern.state.PaymentState;
 import lombok.AllArgsConstructor;
@@ -13,21 +14,7 @@ public class PaymentTransaction {
     private PaymentType paymentType;
     private double amount;
     private PaymentState paymentState;
-
-    public void processTransaction() {
-        paymentState.process(this);
-    }
-
-    public void onSuccess() {
-        paymentState.onSuccess(this);
-    }
-
-    public void onFailure() {
-        paymentState.onFailure(this);
-    }
-
-    public void setState(PaymentState paymentState) {
-        this.paymentState = paymentState;
-    }
+    private IdempotencyKey idempotencyKey;
+    private PaymentStatus status;
 
 }
